@@ -67,8 +67,6 @@ Node * addLast(Node * e, LinkedList * l) {
 }
 
 Node * removeFirst(LinkedList * l) { 
-    // Returns a reference to the removed node. It is up to the programmer
-    // to free this node to avoid memory leaks
     if (l == NULL) { 
         return NULL;
     } 
@@ -83,14 +81,15 @@ Node * removeFirst(LinkedList * l) {
         l->length--;
         if (next_head != NULL) { 
             next_head->previous = NULL;
+        } else { 
+            // Set the tail to NULL when removing the last element 
+            l->tail = NULL;
         }
         return current_head;
     }
 }
 
 Node * removeLast(LinkedList * l) { 
-    // Returns a reference to the removed node. It is up to the programmer
-    // to free this node to avoid memory leaks
     if (l == NULL) { 
         return NULL;
     } 
@@ -105,12 +104,28 @@ Node * removeLast(LinkedList * l) {
         l->length--;
         if (next_tail != NULL) { 
             next_tail->next = NULL;
+        } else { 
+            // Set the head to NULL when removing the last element 
+            l->head = NULL;
         }
         return current_tail;
     }
 }
 
+Node * getFirst(LinkedList * l) { 
+    if (l == NULL) { 
+        return NULL;
+    }
+    return l->head;
+}
 
+Node * getLast(LinkedList * l) { 
+    // O(1) implementation due to the pointer to the linked list's tail
+    if (l == NULL) { 
+        return NULL;
+    }
+    return l->tail;
+}
 
 void showList(LinkedList * l) { 
     // Basic defensive checks 
