@@ -2,5 +2,7 @@
 #define _TESTS_H
 
 #include "linked_list.h"
+void printTest();
+
 
 #endif
