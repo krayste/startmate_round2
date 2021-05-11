@@ -15,8 +15,8 @@ int main() {
     Testing positive/negative/edge cases for linked list functionality. Note 
     that the removeFoo() functions remove a node from the list, but it is still
     allocated in memory. It is the programmer's job to freeNode() on these 
-    nodes. I would normally use CMocka for comprehensive unit testing, so 
-    these tests simply check for basic functionality and some edge cases.
+    nodes. Stricter testing in future should be done using a testing framework
+    such as CMocka
     */
     LinkedList * linked_list_1 = makeList(NULL);
     
