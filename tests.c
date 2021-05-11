@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "linked_list.h"
-#include "tests.h"
 
 /*
 Startmate Round 2 Task. 
