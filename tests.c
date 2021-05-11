@@ -73,5 +73,7 @@ int main() {
     addFirst(makeNode(2), linked_list_1); 
     assert(getFirst(linked_list_1)->data == 2);
     assert(getLast(linked_list_1)->data == 1);
+    
+    return 0;
 }
 
