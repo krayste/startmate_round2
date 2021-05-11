@@ -13,5 +13,5 @@ first and last elements. I've also written some basic tests, however for
 stricter testing in future I would use a testing framework like CMocka.
 
 To run the tests, please type in the terminal:
-make test       (to compile) 
+make            (to compile) 
 ./tests         (to run the tests!)
