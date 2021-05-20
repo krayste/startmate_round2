@@ -1,5 +1,6 @@
 Hi! My name is Steve and this is my implementation for a linked list that 
 supports:
+- reverse       (in O(n) time)
 - add_first     (returns the added node)
 - add_last      (returns the added node)
 - remove_first

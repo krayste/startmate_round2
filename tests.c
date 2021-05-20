@@ -28,21 +28,21 @@ int main() {
     add_first(make_node(2), linked_list_1); 
     add_first(make_node(3), linked_list_1); 
     add_first(make_node(4), linked_list_1); 
-    show_list(linked_list_1); // 4 -> 3 -> 2 -> 1
+    show_list(linked_list_1); // 4->3->2->1
 
     /* Add some nodes to the back */
     add_last(make_node(5), linked_list_1); 
     add_last(make_node(6), linked_list_1); 
     add_last(make_node(7), linked_list_1); 
     add_last(make_node(8), linked_list_1); 
-    show_list(linked_list_1); // 4 -> 3 -> 2 -> 1 -> 5 -> 6 -> 7 -> 8
+    show_list(linked_list_1); // 4->3->2->1->5->6->7->8
 
     /* Remove nodes from the front */
     free_node(remove_first(linked_list_1)); 
     free_node(remove_first(linked_list_1)); 
     free_node(remove_first(linked_list_1)); 
     free_node(remove_first(linked_list_1)); 
-    show_list(linked_list_1); // 5 -> 6 -> 7 -> 8
+    show_list(linked_list_1); // 5->6->7->8
 
     /* Remove some nodes from the back */
     free_node(remove_last(linked_list_1)); 
@@ -73,8 +73,17 @@ int main() {
     add_first(make_node(2), linked_list_1); 
     assert(get_first(linked_list_1)->data == 2); // Checking for correct data 
     assert(get_last(linked_list_1)->data == 1); // Checking for correct data 
-    
     free_list(linked_list_1);
+
+    /* Testing reversing a linked list */
+    LinkedList * linked_list_2 = make_list(NULL);
+    add_first(make_node(1), linked_list_2); 
+    add_first(make_node(2), linked_list_2); 
+    add_first(make_node(3), linked_list_2); 
+    add_first(make_node(4), linked_list_2); 
+    reverse_list(linked_list_2);
+    show_list(linked_list_2); // 1->2->3->4
+
     return 0;
 }
 

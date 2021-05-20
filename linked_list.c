@@ -149,6 +149,25 @@ void show_list(LinkedList * l) {
 
 }
 
+void reverse_list(LinkedList *l) { 
+    // Reverses a singly linked list in O(n) using three cursors  
+    if (l == NULL || l->length == 0 || l->length == 1) { 
+        return;
+    }
+    Node * previous = NULL;
+    Node * current = l->head;
+    Node * tail = l->head; // Temp var for a tail reference
+    Node * next = NULL;
+    while (current != NULL) { 
+        next = current->next;
+        current->next = previous;
+        previous = current;
+        current = next;
+    }
+    l->head = previous;
+    l->tail = tail;
+}
+
 void free_node(Node * e) { 
     free(e);
 }

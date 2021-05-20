@@ -37,4 +37,5 @@ Node * get_second_last(LinkedList * l);
 void show_list(LinkedList * l);
 void free_node(Node * e);
 void free_list(LinkedList * l);
+void reverse_list(LinkedList *l);
 #endif
