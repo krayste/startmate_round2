@@ -83,7 +83,7 @@ int main() {
     add_first(make_node(4), linked_list_2); 
     reverse_list(linked_list_2);
     show_list(linked_list_2); // 1->2->3->4
-
+    free_list(linked_list_2);
     return 0;
 }
 
