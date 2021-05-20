@@ -4,16 +4,15 @@
 
 #include "linked_list.h"
 
-Node * makeNode(int32_t data) { 
+Node * make_node(int32_t data) { 
     // Create and return node struct 
     Node * node = (Node *)malloc(sizeof(Node));
     node->next = NULL;
-    node->previous = NULL;
     node->data = data;
     return node;
 }
 
-LinkedList * makeList(Node * e) { 
+LinkedList * make_list(Node * e) { 
     // Create and return a linked list struct
     LinkedList * linked_list = (LinkedList *)malloc(sizeof(LinkedList));
     // If initialising an empty linked list, set length to zero 
@@ -27,12 +26,11 @@ LinkedList * makeList(Node * e) {
     return linked_list;
 }
 
-Node * addFirst(Node * e, LinkedList * l) { 
-    // Defensive checks 
+Node * add_first(Node * e, LinkedList * l) { 
+    // Add to the front of the LL and return the added node 
     if (e == NULL || l == NULL) { 
         return NULL;
     }
-
     l->length++;
     Node * current_front = l->head;
     // If the list is empty, just add the node as the head and tail and return
@@ -42,14 +40,12 @@ Node * addFirst(Node * e, LinkedList * l) {
         return e;
     }
     // Otherwise, set the new node as the head and link it to the previous head
-    current_front->previous = e;
     e->next = current_front;
     l->head = e;
     return e;
 }
 
-Node * addLast(Node * e, LinkedList * l) { 
-    // Defensive checks 
+Node * add_last(Node * e, LinkedList * l) { 
     if (e == NULL || l == NULL) { 
         return NULL;
     }
@@ -61,27 +57,26 @@ Node * addLast(Node * e, LinkedList * l) {
         return e;
     }
     current_end->next = e;
-    e->previous = current_end;
     l->tail = e;
     return e;
 }
 
-Node * removeFirst(LinkedList * l) { 
+Node * remove_first(LinkedList * l) { 
     if (l == NULL) { 
         return NULL;
     } 
     Node * current_head = l->head;
     if (current_head == NULL) { 
-        return NULL;
+        // According to the specs, cannot remove from an empty list 
+        fprintf(stderr, "Cannot remove_first from an empty list!\n");
+        exit(ERROR);
     } else { 
         Node * next_head = current_head->next;
-        // Make the list inaccessible to the removed node 
+        // Make the LL inaccessible to the removed node 
         current_head->next = NULL;
         l->head = next_head;
         l->length--;
-        if (next_head != NULL) { 
-            next_head->previous = NULL;
-        } else { 
+        if (next_head == NULL) { 
             // Set the tail to NULL when removing the last element 
             l->tail = NULL;
         }
@@ -89,17 +84,16 @@ Node * removeFirst(LinkedList * l) {
     }
 }
 
-Node * removeLast(LinkedList * l) { 
+Node * remove_last(LinkedList * l) { 
     if (l == NULL) { 
         return NULL;
     } 
     Node * current_tail = l->tail;
     if (current_tail == NULL) { 
-        return NULL;
+        fprintf(stderr, "Cannot remove_first from an empty list!\n");
+        exit(ERROR);
     } else { 
-        Node * next_tail = current_tail->previous;
-        // Make the list inaccessible to the removed node 
-        current_tail->previous = NULL;
+        Node * next_tail = get_second_last(l);
         l->tail = next_tail;
         l->length--;
         if (next_tail != NULL) { 
@@ -112,14 +106,14 @@ Node * removeLast(LinkedList * l) {
     }
 }
 
-Node * getFirst(LinkedList * l) { 
+Node * get_first(LinkedList * l) { 
     if (l == NULL) { 
         return NULL;
     }
     return l->head;
 }
 
-Node * getLast(LinkedList * l) { 
+Node * get_last(LinkedList * l) { 
     // O(1) implementation due to the pointer to the linked list's tail
     if (l == NULL) { 
         return NULL;
@@ -127,34 +121,44 @@ Node * getLast(LinkedList * l) {
     return l->tail;
 }
 
-void showList(LinkedList * l) { 
-    // Basic defensive checks 
+Node * get_second_last(LinkedList * l) {
+    // Gets the second last node in a linked list (if it exists). Due to being 
+    // singly linked, we must traverse until the second last element: O(n)
+    if (l == NULL || l->head == NULL || l->head->next == NULL) { 
+        return NULL;
+    }
+    Node * second_last = l->head;
+    while (second_last->next->next != NULL) { 
+        second_last = second_last->next;
+    }
+    return second_last;
+}
+
+void show_list(LinkedList * l) { 
     if (l == NULL || l->head == NULL) { 
         return;
     }
-
     // Iterate until the second last element
     Node * current_node = l->head;
     for (int i = 0; i < l->length - 1; i++) { 
-        printf("%d -> ", current_node->data);
+        printf("%d->", current_node->data);
         current_node = current_node->next;
     }
-
     // Print the last element without an arrow 
     printf("%d\n", current_node->data);
 
 }
 
-void freeNode(Node * e) { 
+void free_node(Node * e) { 
     free(e);
 }
 
-void freeList(LinkedList * l) { 
-    // First free all the nodes in the list, then free the list itself 
+void free_list(LinkedList * l) { 
+    // Free all the nodes in the list, then free the list itself 
     Node * current_node = l->head;
     while (current_node != NULL) { 
         Node * next_node = current_node->next;
-        freeNode(current_node);
+        free_node(current_node);
         current_node = next_node;
     }
     free(l);

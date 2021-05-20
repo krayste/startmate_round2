@@ -5,16 +5,16 @@
 
 /* Define both a linked list and node struct. The linked list contains 
 information about the state of the list (for better time complexity retrieval), 
-and the list will be implemented as a doubly-linked list for future 
-expandabiility.
+and the list is singly-linked as in the specs.
 */ 
+
+#define ERROR 1
 
 typedef struct node Node;
 typedef struct linkedlist LinkedList;
 typedef struct node { 
-    // Pointer to the next and previous nodes
+    // Pointer to the next node
     Node * next;
-    Node * previous;
     int32_t data;
 } Node;
 
@@ -25,15 +25,16 @@ typedef struct linkedlist {
     int length;
 } LinkedList;
 
-Node * makeNode(int32_t data);
-LinkedList * makeList(Node * e);
-Node * addFirst(Node * e, LinkedList * l);
-Node * addLast(Node * e, LinkedList * l);
-Node * removeFirst(LinkedList * l);
-Node * removeLast(LinkedList * l);
-Node * getFirst(LinkedList * l);
-Node * getLast(LinkedList * l);
-void showList(LinkedList * l);
-void freeNode(Node * e);
-void freeList(LinkedList * l);
+Node * make_node(int32_t data);
+LinkedList * make_list(Node * e);
+Node * add_first(Node * e, LinkedList * l);
+Node * add_last(Node * e, LinkedList * l);
+Node * remove_first(LinkedList * l);
+Node * remove_last(LinkedList * l);
+Node * get_first(LinkedList * l);
+Node * get_last(LinkedList * l);
+Node * get_second_last(LinkedList * l);
+void show_list(LinkedList * l);
+void free_node(Node * e);
+void free_list(LinkedList * l);
 #endif

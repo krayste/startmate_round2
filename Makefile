@@ -5,4 +5,4 @@ tests: linked_list.c tests.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 clean:
-	rm tests
+	rm -f tests

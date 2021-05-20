@@ -17,63 +17,64 @@ int main() {
     nodes. Stricter testing in future should be done using a testing framework
     such as CMocka
     */
-    LinkedList * linked_list_1 = makeList(NULL);
+    LinkedList * linked_list_1 = make_list(NULL);
     
-    // Cannot add a NULL reference to a linked list  
-    addFirst(NULL, linked_list_1); 
-    showList(linked_list_1); // No output 
+    /* Cannot add a NULL reference to a linked list */
+    add_first(NULL, linked_list_1); 
+    show_list(linked_list_1); // No output 
 
-    // Add some nodes to the front 
-    addFirst(makeNode(1), linked_list_1); 
-    addFirst(makeNode(2), linked_list_1); 
-    addFirst(makeNode(3), linked_list_1); 
-    addFirst(makeNode(4), linked_list_1); 
-    showList(linked_list_1); // 4 -> 3 -> 2 -> 1
+    /* Add some nodes to the front */
+    add_first(make_node(1), linked_list_1); 
+    add_first(make_node(2), linked_list_1); 
+    add_first(make_node(3), linked_list_1); 
+    add_first(make_node(4), linked_list_1); 
+    show_list(linked_list_1); // 4 -> 3 -> 2 -> 1
 
-    // Add some nodes to the back 
-    addLast(makeNode(5), linked_list_1); 
-    addLast(makeNode(6), linked_list_1); 
-    addLast(makeNode(7), linked_list_1); 
-    addLast(makeNode(8), linked_list_1); 
-    showList(linked_list_1); // 4 -> 3 -> 2 -> 1 -> 5 -> 6 -> 7 -> 8
+    /* Add some nodes to the back */
+    add_last(make_node(5), linked_list_1); 
+    add_last(make_node(6), linked_list_1); 
+    add_last(make_node(7), linked_list_1); 
+    add_last(make_node(8), linked_list_1); 
+    show_list(linked_list_1); // 4 -> 3 -> 2 -> 1 -> 5 -> 6 -> 7 -> 8
 
-    // Remove nodes from the front 
-    freeNode(removeFirst(linked_list_1)); 
-    freeNode(removeFirst(linked_list_1)); 
-    freeNode(removeFirst(linked_list_1)); 
-    freeNode(removeFirst(linked_list_1)); 
-    showList(linked_list_1); // 5 -> 6 -> 7 -> 8
+    /* Remove nodes from the front */
+    free_node(remove_first(linked_list_1)); 
+    free_node(remove_first(linked_list_1)); 
+    free_node(remove_first(linked_list_1)); 
+    free_node(remove_first(linked_list_1)); 
+    show_list(linked_list_1); // 5 -> 6 -> 7 -> 8
 
-    // Remove some nodes from the back 
-    freeNode(removeLast(linked_list_1)); 
-    freeNode(removeLast(linked_list_1)); 
-    freeNode(removeLast(linked_list_1)); 
-    showList(linked_list_1); // 5
+    /* Remove some nodes from the back */
+    free_node(remove_last(linked_list_1)); 
+    free_node(remove_last(linked_list_1)); 
+    free_node(remove_last(linked_list_1)); 
+    show_list(linked_list_1); // 5
 
-    // Edge cases: Removing the first and last of a one element linked list 
-    freeNode(removeFirst(linked_list_1)); 
-    showList(linked_list_1); // No output
+    /* Edge cases: Removing the first and last of a one element linked list */
+    free_node(remove_first(linked_list_1)); 
+    show_list(linked_list_1); // No output
+    add_first(make_node(1), linked_list_1); 
+    free_node(remove_last(linked_list_1)); 
+    show_list(linked_list_1); // No output
 
-    addFirst(makeNode(1), linked_list_1); 
-    freeNode(removeLast(linked_list_1)); 
-    showList(linked_list_1); // No output
+    /* Negative case: Removing from an empty list will throw an error. 
+    Uncomment these lines then compile to demonstrate. */
+    // free_node(remove_first(linked_list_1)); 
+    // show_list(linked_list_1);
+    // free_node(remove_last(linked_list_1)); 
+    // show_list(linked_list_1);
 
-    // Negative case: Removing from an empty list 
-    freeNode(removeFirst(linked_list_1)); 
-    showList(linked_list_1); // No output
-    freeNode(removeLast(linked_list_1)); 
-    showList(linked_list_1); // No output
-
-    // Testing getting the first and last elements of the linked list 
-    assert(getFirst(linked_list_1) == NULL);
-    assert(getLast(linked_list_1) == NULL);
-    addFirst(makeNode(1), linked_list_1); 
-    assert(getFirst(linked_list_1)->data == 1);
-    assert(getLast(linked_list_1)->data == 1);
-    addFirst(makeNode(2), linked_list_1); 
-    assert(getFirst(linked_list_1)->data == 2);
-    assert(getLast(linked_list_1)->data == 1);
+    /* Testing getting the first and last elements of the linked list */
+    assert(get_first(linked_list_1) == NULL); // Empty lists should return NULL
+    assert(get_last(linked_list_1) == NULL); // Empty lists should return NULL
+    add_first(make_node(1), linked_list_1); 
+    assert(get_first(linked_list_1)->data == 1); // Checking for correct data 
+    assert(get_last(linked_list_1)->data == 1); // Checking for correct data 
+    add_first(make_node(2), linked_list_1); 
+    assert(get_first(linked_list_1)->data == 2); // Checking for correct data 
+    assert(get_last(linked_list_1)->data == 1); // Checking for correct data 
     
+    free_list(linked_list_1);
     return 0;
 }
 
